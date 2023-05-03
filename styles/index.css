@@ -1,0 +1,67 @@
+@import url(./root.css);
+
+body {
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 100vh;
+}
+
+h1 {
+    font-size: 5em;
+
+    transition: letter-spacing 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+h2 {
+    font-size: 2em;
+}
+
+h2:hover {
+    cursor: default;
+}
+
+h1:hover {
+    letter-spacing: 0.3em;
+    cursor: default;
+}
+
+.dot {
+    position: absolute;
+
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+
+    background-color: black;
+    z-index: 3;
+
+    transition: transform 0.5s;
+}
+
+.dot:hover {
+    transform: scale(1.5);
+}
+
+.dot:active {
+    transform: scale(1.2);
+}
+
+span {
+    color: red;
+}
+
+span:hover {
+    cursor: pointer;
+}
+
+h3 {
+    color: transparent;
+    transition: color 0.3s;
+}
