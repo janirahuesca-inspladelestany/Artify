@@ -1,6 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Khand&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Khand&display=swap");
+
+:root {
+    --pale-blue: #a6dde8;
+    --powder-blue: #c6dcea;
+    --lavender-gray: #e3d7ec;
+    --pale-lilac: #ebd1e8;
+    --mauve-pink: #eac3e0;
+    --dusty-rose: #eea4ca;
+    --rose-red: #d3678d;
+    --midnight-blue: #0f344a;
+    --slate-blue: #2b5d7a;
+    --steel-blue: #20749e;
+    --blue-gray: #6f8ba8;
+    --periwinkle: #9597ba;
+    --light-lavender: #b7abce;
+    --soft-lilac: #c6b9de;
+}
 
 body {
     margin: 0;
-    font-family: 'Khand', sans-serif;
+    font-family: "Khand", sans-serif;
 }
