@@ -10,7 +10,7 @@ dot.style.top = y + "px";
 document.body.appendChild(dot);
 (_a = document.querySelector(".dot")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", function () {
     dot.style.transition = "2s";
-    dot.style.transform = "scale(300)";
+    dot.style.transform = "scale(1000)";
 });
 (_b = document.querySelector("span")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", function () {
     const troll_text = document.querySelector("h3");
