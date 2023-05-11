@@ -116,26 +116,38 @@ button[title="previous"]:active {
 
     padding-left: 20%;
     padding-right: 20%;
+
+    margin-bottom: 15em;
 }
 
 .image {
     width: 15em;
     height: 15em;
-    border-radius: 0.5em;
-    background-color: rgb(65, 143, 150);
 
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: 100%;
+    object-fit: fill;
+
+    transition: transform 0.3s;
+}
+
+.image:hover {
+    transform: scale(1.2);
+}
+
+.image:active {
+    transform: scale(1.1);
 }
 
 footer {
-    margin-top: 5em;
+    position: fixed;
+    bottom: 0;
     width: 100%;
     background-color: var(--blue-gray);
     color: var(--powder-blue);
-    padding-top: 1em;
-    padding-bottom: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     text-align: center;
 
     font-size: 1.1em;
