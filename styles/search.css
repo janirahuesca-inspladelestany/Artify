@@ -81,10 +81,75 @@ select[title="type"]:focus {
     font-size: 0.8em;
 }
 
-button[title="next"] {
-    background-color: var(--midnight-blue);
-    color: var(--pale-blue);
+button[title="next"],
+button[title="previous"] {
+    background-color: var(--pale-blue);
+    color: var(--slate-blue);
     border: none;
+    outline: none;
+    border-radius: 0.5em;
+
+    transition: filter 0.2s;
+}
+
+button[title="next"]:hover,
+button[title="previous"]:hover {
+    filter: brightness(1.1);
+}
+
+button[title="next"]:active,
+button[title="previous"]:active {
+    filter: brightness(1.2);
+}
+
+.pages > p {
+    font-weight: bold;
+}
+
+.images {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1em;
+    margin-top: 5em;
+
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.image {
+    width: 15em;
+    height: 15em;
+    border-radius: 0.5em;
+    background-color: rgb(65, 143, 150);
+
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+footer {
+    margin-top: 5em;
+    width: 100%;
+    background-color: var(--blue-gray);
+    color: var(--powder-blue);
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: center;
+
+    font-size: 1.1em;
+}
+
+footer a {
+    padding: 0.5em;
+    font-size: 1.5em;
+    color: var(--steel-blue);
+}
+
+footer a:hover {
+    font-size: 1.5em;
+    color: var(--midnight-blue);
 }
 
 @media (max-width: 1100px) {
