@@ -5,6 +5,7 @@ let currentPage = 1;
 let maxPages;
 
 const imagesContainer = document.querySelector(".images");
+const videosContainer = document.querySelector(".videos");
 search()
 
 function search() {
@@ -19,10 +20,22 @@ function search() {
             showImage(image)
         }
     });
+
+    videosContainer.innerHTML = "";
+
+    getVideos(searchParams, currentPage).then((videos) => {
+        console.log(videos)
+        maxPages = videos.totalPages
+        updatePages();
+
+        for (let video of videos.videos) {
+            showVideo(video)
+        }
+    });
 }
 
 const searchInput = document.querySelector(".search");
-searchInput.addEventListener("change", function() {
+searchInput.addEventListener("change", function () {
 
     searchParams = searchInput.value;
     currentPage = 1;
@@ -32,7 +45,7 @@ searchInput.addEventListener("change", function() {
 const pages = document.querySelector(".pages > p")
 
 const nextButton = document.querySelector(`button[title="next"]`)
-nextButton.addEventListener("click", function() {
+nextButton.addEventListener("click", function () {
     if (currentPage < maxPages) currentPage++;
     updatePages();
 
@@ -40,7 +53,7 @@ nextButton.addEventListener("click", function() {
 })
 
 const previousButton = document.querySelector(`button[title="previous"]`)
-previousButton.addEventListener("click", function() {
+previousButton.addEventListener("click", function () {
     if (currentPage > 1) currentPage--;
     updatePages();
 
@@ -56,7 +69,25 @@ function updatePages() {
 function showImage(image) {
     const imageContainer = document.createElement('div');
     imageContainer.classList.add("image");
-    imageContainer.style.backgroundImage = `url(${image.previewURL})`;
+    imageContainer.style.backgroundImage = `url(${image.webformatURL})`;
 
     imagesContainer.appendChild(imageContainer);
+}
+
+
+function showVideo(video) {
+    const videoContainer = document.createElement('div');
+    videoContainer.classList.add("video");
+
+    const source = video.webformatURL;
+    const width = video.webformatWidth;
+    const height = video.webformatHeight;
+
+    videoContainer.innerHTML = `
+      <video width="${width}" height="${height}" autoplay muted loop>
+        <source src="${source}" type="video/mp4">
+      </video>
+    `;
+
+    imagesContainer.appendChild(videoContainer);
 }
