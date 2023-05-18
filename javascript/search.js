@@ -137,19 +137,30 @@ function showImage(image) {
   imagesContainer.appendChild(imageContainer);
 }
 
+
+
 function showVideo(video) {
-  videosContainer = document.querySelector(".videos");
-
-  const videoContainer = document.createElement("div");
-  videoContainer.classList.add("video");
-
-  const source = video.videos.tiny.url;
-
-  videoContainer.innerHTML = `
-      <video autoplay muted loop>
-        <source src="${source}" type="video/mp4">
-        </video>
-    `;
-
-  videosContainer.appendChild(videoContainer);
-}
+    videosContainer = document.querySelector(".videos");
+  
+    const videoContainer = document.createElement("div");
+    videoContainer.classList.add("video");
+  
+    const videoElement = document.createElement("video");
+    videoElement.autoplay = true;
+    videoElement.muted = true;
+    videoElement.loop = true;
+  
+    const sourceElement = document.createElement("source");
+    sourceElement.src = video.videos.tiny.url;
+    sourceElement.type = "video/mp4";
+  
+    const videoLikes = document.createElement("div");
+    videoLikes.classList.add("videoLikes");
+    videoLikes.textContent = video.likes;
+  
+    videoElement.appendChild(sourceElement);
+    videoContainer.appendChild(videoLikes);
+    videoContainer.appendChild(videoElement);
+    videosContainer.appendChild(videoContainer);
+  }
+  

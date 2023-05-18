@@ -210,7 +210,15 @@ footer a:hover {
     padding-right: 10%;
 }
 
+.video {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 video {
+    position: relative;
     height: 15em;
     width: 20em;
 
@@ -223,6 +231,39 @@ video:hover {
 
 video:active {
     transform: scale(2.5);
+}
+
+.videoLikes {
+    position: absolute;
+    font-size: 3em;
+    font-weight: bold;
+    color: cornflowerblue;
+    opacity: 0;
+
+    z-index: 10;
+
+    transition: opacity 0.5s;
+}
+
+.videoLikes::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image: url(../assets/icons/like.svg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 70%;
+    z-index: 11;
+
+    transform: translateY(50%);
+}
+
+.video:active > .videoLikes {
+    opacity: 1;
 }
 
 .dotAnimation {
