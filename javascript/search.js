@@ -4,90 +4,138 @@ let searchParams = "dogs";
 let currentPage = 1;
 let maxPages;
 
-const imagesContainer = document.querySelector(".images");
-const videosContainer = document.querySelector(".videos");
-search()
+let imagesContainer = document.querySelector(".images");
+let videosContainer = document.querySelector(".videos");
+
+const mediaSelectorType = document.querySelector(`select[title="type"]`);
+const contentContainer = document.querySelector(".contentContainer");
+
+search();
 
 function search() {
-    imagesContainer.innerHTML = "";
+  if (mediaSelectorType.value == "images") {
+    //Eliminar el videosContainer
+    if (videosContainer != null) videosContainer.remove();
 
+    //Crear el imagesContainer
+    const imagesContainerSection = document.createElement("section");
+    imagesContainerSection.classList.add("images");
+    contentContainer.appendChild(imagesContainerSection);
+
+    //Borrar les imatges que hi ha al imagesContainer
+    removeImages();
+
+    //Agafar les imatges de la API
     getImages(searchParams, currentPage).then((images) => {
-        console.log(images)
-        maxPages = images.totalPages
-        updatePages();
+      console.log(images);
+      maxPages = images.totalPages;
+      updatePages();
 
-        for (let image of images.images) {
-            showImage(image)
-        }
+      //Posar les imatges al imagesContainer
+      for (let image of images.images) {
+        showImage(image);
+      }
     });
+  }
 
-    videosContainer.innerHTML = "";
+  if (mediaSelectorType.value == "videos") {
+    //Eliminar el imagesContainer
+    if (imagesContainer != null) imagesContainer.remove();
 
+    //Crear el videosContainer
+    const videosContainerSection = document.createElement("section");
+    videosContainerSection.classList.add("videos");
+    contentContainer.appendChild(videosContainerSection);
+
+    //Borrar les videos que hi ha al videosContainer
+    removeVideos();
+
+    //Agafar els videos de la API
     getVideos(searchParams, currentPage).then((videos) => {
-        console.log(videos)
-        maxPages = videos.totalPages
-        updatePages();
+      console.log(videos);
+      maxPages = videos.totalPages;
+      updatePages();
 
-        for (let video of videos.videos) {
-            showVideo(video)
-        }
+      for (let video of videos.videos) {
+        showVideo(video);
+      }
     });
+  }
 }
+
+function removeImages() {
+    imagesContainer = document.querySelector(".images");
+
+    for (let i = imagesContainer.childNodes.length -1; i>0; i--) {
+        imagesContainer.removeChild(imagesContainer.childNodes[i]);
+    }
+}
+
+function removeVideos() {
+    videosContainer = document.querySelector(".videos");
+
+    for (let i = videosContainer.childNodes.length -1; i>0; i--) {
+        videosContainer.removeChild(videosContainer.childNodes[i]);
+    }
+}
+
+mediaSelectorType.addEventListener("change", function () {
+  search();
+});
 
 const searchInput = document.querySelector(".search");
 searchInput.addEventListener("change", function () {
+  searchParams = searchInput.value;
+  currentPage = 1;
+  search();
+});
 
-    searchParams = searchInput.value;
-    currentPage = 1;
-    search()
-})
+const pages = document.querySelector(".pages > p");
 
-const pages = document.querySelector(".pages > p")
-
-const nextButton = document.querySelector(`button[title="next"]`)
+const nextButton = document.querySelector(`button[title="next"]`);
 nextButton.addEventListener("click", function () {
-    if (currentPage < maxPages) currentPage++;
-    updatePages();
+  if (currentPage < maxPages) currentPage++;
+  updatePages();
 
-    search()
-})
+  search();
+});
 
-const previousButton = document.querySelector(`button[title="previous"]`)
+const previousButton = document.querySelector(`button[title="previous"]`);
 previousButton.addEventListener("click", function () {
-    if (currentPage > 1) currentPage--;
-    updatePages();
+  if (currentPage > 1) currentPage--;
+  updatePages();
 
-    search()
-})
+  search();
+});
 
 function updatePages() {
-    if (maxPages >= 1) pages.textContent = `${currentPage} - ${maxPages}`;
-    else pages.textContent = `0 - 0`;
+  if (maxPages >= 1) pages.textContent = `${currentPage} - ${maxPages}`;
+  else pages.textContent = `0 - 0`;
 }
-
 
 function showImage(image) {
-    const imageContainer = document.createElement('div');
-    imageContainer.classList.add("image");
-    imageContainer.style.backgroundImage = `url(${image.webformatURL})`;
+  imagesContainer = document.querySelector(".images");
 
-    imagesContainer.appendChild(imageContainer);
+  const imageContainer = document.createElement("div");
+  imageContainer.classList.add("image");
+  imageContainer.style.backgroundImage = `url(${image.webformatURL})`;
+
+  imagesContainer.appendChild(imageContainer);
 }
 
-
 function showVideo(video) {
-    const videoContainer = document.createElement('div');
-    videoContainer.classList.add("video");
+  videosContainer = document.querySelector(".videos");
 
-    const source = video.webformatURL;
-    const width = video.webformatWidth;
-    const height = video.webformatHeight;
+  const videoContainer = document.createElement("div");
+  videoContainer.classList.add("video");
 
-    videoContainer.innerHTML = `
-      <video width="${width}" height="${height}" autoplay muted loop>
+  const source = video.videos.tiny.url;
+
+  videoContainer.innerHTML = `
+      <video autoplay muted loop>
         <source src="${source}" type="video/mp4">
       </video>
     `;
 
-    imagesContainer.appendChild(videoContainer);
+  videosContainer.appendChild(videoContainer);
 }
