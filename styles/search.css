@@ -121,23 +121,59 @@ button[title="previous"]:active {
 }
 
 .image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    position: relative;
     width: 15em;
     height: 15em;
 
     background-position: 50% 50%;
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: 150%;
     object-fit: fill;
 
-    transition: transform 0.3s;
+    transition-property: transform, background-size;
+    transition: 0.3s;
 }
 
 .image:hover {
-    transform: scale(1.2);
+    background-size: 110%;
+    transform: scale(2);
+    z-index: 10;
 }
 
 .image:active {
-    transform: scale(1.1);
+    background-size: 100%;
+    transform: scale(2.5);
+}
+
+.imageDownloads {
+    font-size: 1em;
+    font-weight: bold;
+    color: cornflowerblue;
+    opacity: 0;
+
+    transition: opacity 0.5s;
+}
+
+.image:active > .imageDownloads {
+    opacity: 1;
+}
+
+.imageDownloads::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image: url(../assets/icons/save.svg);
+    background-repeat: no-repeat;
+    background-position: 50% 60%;
+    background-size: 10%;
 }
 
 footer {
@@ -172,46 +208,16 @@ footer a:hover {
 video {
     height: 15em;
     width: 20em;
-}
-
-.contentInfo {
-    position: fixed;
-
-    top: 50%;
-    left: 50%;
-
-    width: 60em;
-    height: 40em;
-
-    transform: translate(-50%, -50%);
-    
-    z-index: 50;
-    border: var(--rose-red) solid 0.2em;
-    background: linear-gradient(335deg, var(--rose-red) 0%, var(--dusty-rose) 100%);
-}
-
-.contentInfo::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 3em;
-    height: 3em;
-
-    background-image: url(../assets/icons/x.svg);
-    background-position: 50% 50%;
-    background-size: 100%;
-    background-repeat: no-repeat;
 
     transition: transform 0.3s;
 }
 
-.contentInfo:hover > ::after {
-    transform: scale(1.2);
+video:hover {
+    transform: scale(2);
 }
 
-.contentInfo:active > ::after{
-    transform: scale(1.1);
+video:active {
+    transform: scale(2.5);
 }
 
 .mediaContent {

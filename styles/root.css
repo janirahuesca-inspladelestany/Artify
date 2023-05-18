@@ -22,3 +22,20 @@ body {
     font-family: "Khand", sans-serif;
     overflow-x: hidden;
 }
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--mauve-pink);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--rose-red);
+    border-radius: 0.5em;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--dusty-rose);
+}
